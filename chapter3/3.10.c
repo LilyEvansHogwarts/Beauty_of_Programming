@@ -43,6 +43,36 @@ void printNodeByLevel3(TreeNode* root) {
     }
 }
 
+//extend
+void print(TreeNode* root) {
+    if(root == NULL) return;
+    vector<int> local;
+    vector<TreeNode*> res;
+    int cur = 0,i = 0;
+    res.push_back(root);
+    local.push_back(0);
+    while(cur < res.size()) {
+	local.push_back(res.size());
+	i++;
+	while(cur < local[i]) {
+	    if(res[cur]->right)
+		res.push_back(res[cur]->right);
+	    if(res[cur]->left)
+		res.push_back(res[cur]->left);
+	    cur++;
+	}
+    }
+    cur = local[i]-1;
+    while(cur >= local[0]) {
+	i--;
+	while(cur >= local[i]) 
+	    cout << res[cur--]->val << " ";
+	cout << endl;
+    }
+}
+
+
+
 TreeNode* generate_solve(int k,int n) {
     if(k == n) return NULL;
     TreeNode *root = new TreeNode(rand()%10000);
@@ -72,6 +102,9 @@ int main() {
     cout << "time: " << clock()-start << endl;
     start = clock();
     printNodeByLevel3(root);
+    cout << "time: " << clock()-start << endl;
+    start = clock();
+    print(root);
     cout << "time: " << clock()-start << endl;
     return 0;
 }
