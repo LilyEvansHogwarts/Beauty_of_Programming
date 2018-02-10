@@ -2,9 +2,10 @@
 
 const int stackSize = 256;
 
+//FILO
 class maxStack {
 public:
-    maxStack {
+    maxStack() {
 	stackTop = -1;
 	maxStackItemIndex = -1;
     }
