@@ -45,8 +45,39 @@ private:
     int linkNextMaxItem[stackSize];
 };
 
+//FIFO
+class maxQueue {
+public:
+    void push(int x) {
+	stackB.push(x);
+    }
+
+    int pop() {
+	if(stackA.empty() && stackB.empty())
+	    return INT_MIN;
+	if(stackA.empty()) {
+	    while(!stackB.empty())
+		stackA.push(stackB.pop());
+	}
+	return stackA.pop();
+    }
+
+    int Max() {
+	return max(stackA.Max(),stackB.Max());
+    }
+
+    int empty() {
+	return stackA.empty() && stackB.empty();
+    }
+
+private:
+    maxStack stackA;
+    maxStack stackB;
+};
+
 int main() {
     maxStack s;
+    cout << "maxStack:" << endl;
     for(int i = 0;i < 10;i++) {
 	int res = rand()%100;
 	s.push(res);
@@ -55,5 +86,15 @@ int main() {
     cout << endl;
     for(int i = 0;i < 10;i++) 
 	cout << s.pop() << " " << s.Max() << endl;
+    maxQueue q;
+    cout << "maxQueue:" << endl;
+    for(int i = 0;i < 10;i++) {
+	int res = rand()%100;
+	q.push(res);
+	cout << res << " " << q.Max() << endl;
+    }
+    cout << endl;
+    for(int i = 0;i < 10;i++)
+	cout << q.pop() << " " << q.Max() << endl;
     return 0;
 }
