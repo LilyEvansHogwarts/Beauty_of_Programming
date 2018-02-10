@@ -5,6 +5,7 @@
 #include<algorithm>
 #include<stdlib.h>
 #include<stdio.h>
+#include<stack>
 #include<unistd.h>
 #include<unordered_map>
 #define INT_MAX 2147483647
